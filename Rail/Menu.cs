@@ -11,28 +11,8 @@ using MySql.Data.MySqlClient;
 
 namespace Rail
 {
-    public partial class Form1 : Form
+    public partial class Menu : Form
     {
-        // Интерфейсы
-
-        interface IData
-        {
-            void Data();
-            void Quantity();
-            void Privilege()
-            {
-                MessageBox.Show("Только клиент имеет привелегию");
-            }
-        }
-
-        interface IAccounting
-        {
-            void Income();
-            void Expenses();
-            void NumberSales();
-            void NumberPurchases();
-        }
-        
         // Класс ConnectDB
 
         class ConnectionDB
@@ -53,9 +33,21 @@ namespace Rail
             }
         }
 
-        // Класс Person и его наследники
+        // Интерфейс и класс Person с наследниками
 
-        class Person : IData
+        interface IPerson
+        {
+            void Data();
+            void Quantity();
+            void Privilege()
+            {
+                MessageBox.Show("Только клиент имеет привелегию");
+            }
+            void AddUser();
+            void DeleteUser();
+        }
+
+        class Person : IPerson
         {
             public void Data ()
             {
@@ -65,9 +57,17 @@ namespace Rail
             {
                 MessageBox.Show("Общее количество людей");
             }
+            public void AddUser()
+            {
+                MessageBox.Show("Добавить пользователя");
+            }
+            public void DeleteUser()
+            {
+                MessageBox.Show("Удалить пользователя");
+            }
         }
 
-        class Employee : Person, IData
+        class Employee : Person, IPerson
         {
             public new void Data()
             {
@@ -77,9 +77,17 @@ namespace Rail
             {
                 MessageBox.Show("Количество сотрудников");
             }
+            public new void AddUser()
+            {
+                MessageBox.Show("Добавить сотрудника");
+            }
+            public new void DeleteUser()
+            {
+                MessageBox.Show("Уволить сотрудника");
+            }
         }
 
-        class Clients : Person, IData
+        class Clients : Person, IPerson
         {
             public new void Data()
             {
@@ -90,8 +98,16 @@ namespace Rail
                 MessageBox.Show("Количество клиентов");
             }
             public void Privilege() { }
+            public new void AddUser()
+            {
+                MessageBox.Show("Добавить клиента");
+            }
+            public new void DeleteUser()
+            {
+                MessageBox.Show("Удалить клиента");
+            }
         }
-        public Form1()
+        public Menu()
         {
             InitializeComponent();
         }
