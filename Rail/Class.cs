@@ -64,6 +64,31 @@ namespace Rail
 
     class Employees : Persons, IPerson
     {
+        public bool InsertPrepods(string fio_employee, string position_employee, MySqlConnection conn)
+        {
+            int InsertCount = 0;
+            bool result = false;
+            conn.Open();
+            string query = $"INSERT INTO employees (fio_employee, position_employee) VALUES ('{fio_employee}', '{position_employee}')";
+            try
+            {
+                MySqlCommand command = new MySqlCommand(query, conn);
+                InsertCount = command.ExecuteNonQuery();
+            }
+            catch
+            {
+                InsertCount = 0;
+            }
+            finally
+            {
+                conn.Close();
+                if (InsertCount != 0)
+                {
+                    result = true;
+                }
+            }
+            return result;
+        }
         public void UpdateEmployees(string id, string fio, string position, MySqlConnection conn)
         {
             string id_employee = id;
