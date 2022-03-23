@@ -11,6 +11,18 @@ using MySql.Data.MySqlClient;
 
 namespace Rail
 {
+    interface IPerson
+    {
+        void Data();
+        void Quantity();
+        void Privilege()
+        {
+            MessageBox.Show("Только клиент имеет привелегию");
+        }
+        void AddUser();
+        void DeleteUser();
+    }
+
     class ConnectionDB
     {
         public static MySqlConnection ConnDB()
@@ -27,18 +39,6 @@ namespace Rail
 
             return conn;
         }
-    }
-
-    interface IPerson
-    {
-        void Data();
-        void Quantity();
-        void Privilege()
-        {
-            MessageBox.Show("Только клиент имеет привелегию");
-        }
-        void AddUser();
-        void DeleteUser();
     }
 
     class Person : IPerson
@@ -116,10 +116,6 @@ namespace Rail
         {
             MessageBox.Show("Добавить клиента");
         }
-        public new void DeleteUser()
-        {
-            MessageBox.Show("Удалить клиента");
-        }
 
         static public new void SelectUsers(ListBox lv, MySqlConnection conn)
         {
@@ -139,5 +135,6 @@ namespace Rail
             reader.Close();
             conn.Close();
         }
+
     }
 }
