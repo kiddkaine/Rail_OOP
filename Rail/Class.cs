@@ -41,7 +41,7 @@ namespace Rail
         }
     }
 
-    class Person : IPerson
+    class Persons : IPerson
     {
         public void Data()
         {
@@ -63,7 +63,7 @@ namespace Rail
         static public void SelectUsers(ListBox lv, MySqlConnection conn) { }
     }
 
-    class Employee : Person, IPerson
+    class Employees : Persons, IPerson
     {
         public new void Data()
         {
@@ -101,7 +101,7 @@ namespace Rail
         }
     }
 
-    class Clients : Person, IPerson
+    class Clients : Persons, IPerson
     {
         public new void Data()
         {
@@ -135,6 +135,5 @@ namespace Rail
             reader.Close();
             conn.Close();
         }
-
     }
 }
