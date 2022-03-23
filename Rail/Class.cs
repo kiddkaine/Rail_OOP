@@ -64,12 +64,12 @@ namespace Rail
 
     class Employees : Persons, IPerson
     {
-        public void UpdateEmployees(string a, string b, string c, MySqlConnection conn)
+        public void UpdateEmployees(string id, string fio, string position, MySqlConnection conn)
         {
-            string id_employee = a;
-            string new_fio = b;
-            string new_position = c;
-            if (String.IsNullOrWhiteSpace(a) || String.IsNullOrWhiteSpace(b) || String.IsNullOrWhiteSpace(c))
+            string id_employee = id;
+            string new_fio = fio;
+            string new_position = position;
+            if (String.IsNullOrWhiteSpace(id) || String.IsNullOrWhiteSpace(fio) || String.IsNullOrWhiteSpace(position))
             {
                 MessageBox.Show("Введите данные!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -115,13 +115,13 @@ namespace Rail
 
     class Clients : Persons, IPerson
     {
-        public void UpdateClients(string a, string b, string c, string d, MySqlConnection conn)
+        public void UpdateClients(string id, string fio, string pass, string privilege, MySqlConnection conn)
         {
-            string id_client = a;
-            string new_fio = b;
-            string new_pass = c;
-            string new_privilege = d;
-            if (String.IsNullOrWhiteSpace(a) || String.IsNullOrWhiteSpace(b) || String.IsNullOrWhiteSpace(c) || String.IsNullOrWhiteSpace(d))
+            string id_client = id;
+            string new_fio = fio;
+            string new_pass = pass;
+            string new_privilege = privilege;
+            if (String.IsNullOrWhiteSpace(id) || String.IsNullOrWhiteSpace(fio) || String.IsNullOrWhiteSpace(pass) || String.IsNullOrWhiteSpace(privilege))
             {
                 MessageBox.Show("Введите данные!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
