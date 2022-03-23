@@ -64,7 +64,7 @@ namespace Rail
 
     class Employees : Persons, IPerson
     {
-        public bool InsertPrepods(string fio_employee, string position_employee, MySqlConnection conn)
+        public bool InsertEmployees(string fio_employee, string position_employee, MySqlConnection conn)
         {
             int InsertCount = 0;
             bool result = false;
@@ -140,6 +140,31 @@ namespace Rail
 
     class Clients : Persons, IPerson
     {
+        public bool InsertClients(string fio_client, string pass_client, string privilege_client, MySqlConnection conn)
+        {
+            int InsertCount = 0;
+            bool result = false;
+            conn.Open();
+            string query = $"INSERT INTO clients (fio_client, pass_client, privilege_client) VALUES ('{fio_client}', '{pass_client}', '{privilege_client}')";
+            try
+            {
+                MySqlCommand command = new MySqlCommand(query, conn);
+                InsertCount = command.ExecuteNonQuery();
+            }
+            catch
+            {
+                InsertCount = 0;
+            }
+            finally
+            {
+                conn.Close();
+                if (InsertCount != 0)
+                {
+                    result = true;
+                }
+            }
+            return result;
+        }
         public void UpdateClients(string id, string fio, string pass, string privilege, MySqlConnection conn)
         {
             string id_client = id;
