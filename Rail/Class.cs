@@ -59,27 +59,39 @@ namespace Rail
         {
             MessageBox.Show("Удалить пользователя");
         }
-
         static public void SelectUsers(ListBox lv, MySqlConnection conn) { }
     }
 
     class Employees : Persons, IPerson
     {
-        public new void Data()
+        public void UpdateEmployees(string a, string b, string c, MySqlConnection conn)
         {
-            MessageBox.Show("У сотрудников есть свои собственные данные");
-        }
-        public new void Quantity()
-        {
-            MessageBox.Show("Количество сотрудников");
-        }
-        public new void AddUser()
-        {
-            MessageBox.Show("Добавить сотрудника");
-        }
-        public new void DeleteUser()
-        {
-            MessageBox.Show("Уволить сотрудника");
+            string id_employee = a;
+            string new_fio = b;
+            string new_position = c;
+            if (String.IsNullOrWhiteSpace(a) || String.IsNullOrWhiteSpace(b) || String.IsNullOrWhiteSpace(c))
+            {
+                MessageBox.Show("Введите данные!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                try
+                {
+                    conn.Open();
+                    string query2 = $"UPDATE employees SET fio_employee = '{new_fio}', position_employee = '{new_position}' WHERE id_employee = {id_employee}";
+                    MySqlCommand command = new MySqlCommand(query2, conn);
+                    command.ExecuteNonQuery();
+                    MessageBox.Show("Изменение прошло успешно.", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch
+                {
+                    MessageBox.Show("Введите данные!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
         }
 
         static public new void SelectUsers(ListBox lv, MySqlConnection conn)
@@ -103,20 +115,36 @@ namespace Rail
 
     class Clients : Persons, IPerson
     {
-        public new void Data()
+        public void UpdateClients(string a, string b, string c, string d, MySqlConnection conn)
         {
-            MessageBox.Show("У клиентов есть свои собственные данные");
+            string id_client = a;
+            string new_fio = b;
+            string new_pass = c;
+            string new_privilege = d;
+            if (String.IsNullOrWhiteSpace(a) || String.IsNullOrWhiteSpace(b) || String.IsNullOrWhiteSpace(c) || String.IsNullOrWhiteSpace(d))
+            {
+                MessageBox.Show("Введите данные!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                try
+                {
+                    conn.Open();
+                    string query2 = $"UPDATE clients SET fio_client = '{new_fio}', pass_client = '{new_pass}', id_privilege = '{new_privilege}' WHERE id_client = {id_client}";
+                    MySqlCommand command = new MySqlCommand(query2, conn);
+                    command.ExecuteNonQuery();
+                    MessageBox.Show("Изменение прошло успешно.", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch
+                {
+                    MessageBox.Show("Введите данные!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
         }
-        public new void Quantity()
-        {
-            MessageBox.Show("Количество клиентов");
-        }
-        public void Privilege() { }
-        public new void AddUser()
-        {
-            MessageBox.Show("Добавить клиента");
-        }
-
         static public new void SelectUsers(ListBox lv, MySqlConnection conn)
         {
             lv.Items.Clear();
