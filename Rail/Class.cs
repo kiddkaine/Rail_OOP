@@ -22,7 +22,6 @@ namespace Rail
         void AddUser();
         void DeleteUser();
     }
-
     class ConnectionDB
     {
         public static MySqlConnection ConnDB()
@@ -40,7 +39,6 @@ namespace Rail
             return conn;
         }
     }
-
     class Persons : IPerson
     {
         public void Data()
@@ -118,7 +116,6 @@ namespace Rail
                 }
             }
         }
-
         static public new void SelectUsers(ListBox lv, MySqlConnection conn)
         {
             lv.Items.Clear();
@@ -137,7 +134,6 @@ namespace Rail
             conn.Close();
         }
     }
-
     class Clients : Persons, IPerson
     {
         public bool InsertClients(string fio_client, string pass_client, string privilege_client, MySqlConnection conn)
@@ -145,7 +141,7 @@ namespace Rail
             int InsertCount = 0;
             bool result = false;
             conn.Open();
-            string query = $"INSERT INTO clients (fio_client, pass_client, privilege_client) VALUES ('{fio_client}', '{pass_client}', '{privilege_client}')";
+            string query = $"INSERT INTO clients (fio_client, pass_client, id_privilege) VALUES ('{fio_client}', '{pass_client}', '{privilege_client}')";
             try
             {
                 MySqlCommand command = new MySqlCommand(query, conn);
