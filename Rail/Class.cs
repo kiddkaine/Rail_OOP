@@ -22,7 +22,7 @@ namespace Rail
         void AddUser();
         void DeleteUser();
     }
-    public class ConnectionDB
+    public static class ConnectionDB
     {
         public static MySqlConnection ConnDB()
         {
