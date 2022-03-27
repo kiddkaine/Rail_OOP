@@ -22,20 +22,17 @@ namespace Rail
         void AddUser();
         void DeleteUser();
     }
-    class ConnectionDB
+    public class ConnectionDB
     {
         public static MySqlConnection ConnDB()
         {
-            string host = "10.90.12.113";
-            string port = "333333";
-            string database = "is_3_19_st10_KURS";
-            string username = "st_3_19_10";
+            string host = "chuc.caseum.ru";
+            string port = "33333";
+            string user = "st_3_19_10";
+            string db = "is_3_19_st10_KURS";
             string password = "22926640";
-
-            string connString = $"server={host};port={port};user={username};database={database};password={password}";
-
-            MySqlConnection conn = new MySqlConnection(connString);
-
+            string connStr = $"server={host};port={port};user={user};database={db};password={password};";
+            MySqlConnection conn = new MySqlConnection(connStr);
             return conn;
         }
     }
